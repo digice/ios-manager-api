@@ -21,7 +21,7 @@ class Connection {
 
   var delegate : ConnectionDelegate?
 
-  var request : URLRequest = URLRequest(url: URL(string: "https://www.digices.com/otmvc-example/index.php")!)
+  var request : URLRequest = URLRequest(url: URL(string: "https://<#api-url#>/index.php")!)
 
   // access to API is restricted by a global token
 
