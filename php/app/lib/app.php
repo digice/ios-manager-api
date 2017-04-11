@@ -53,13 +53,13 @@ class AppCtl
       } // .token matches
  
       else {
-        die('API Access Requires an access token.');
+        die('API access token is not valid.');
       } // ./token does not match
 
     } // .token is set
  
     else {
-     die('API Access Requires an access token.');
+     die('API Access requires an access token.');
     } // ./token is not set
 
   } // ./construct
