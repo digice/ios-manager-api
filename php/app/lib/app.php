@@ -1,6 +1,7 @@
 <?php
 
-/** the API requires two parameters:
+/** the API requires three parameters:
+  * 't' = a global api token
   * 'm' = the model we are accessing
   * 'a' = the action we want the controller to take
   **/
@@ -15,36 +16,51 @@ class AppCtl
   public function __construct()
   {
 
-    // check for API token
+    // check for global API token
+    if ($t = Req::val('t')) {
 
-    // add your API models to the list of permitted models
-    $permitted_models = array(
-      'example' => 'ExampleCtl',
-      'contact' => 'ContactCtl',
-      'default' => 'DefaultCtl'
-    );
+      if ($t == '1a79a4d60de6718e8e5b326e338ae533') {
 
-    $this->model = 'default';
+        // add your API models to the list of permitted models
+        $permitted_models = array(
+          'example' => 'ExampleCtl',
+          'contact' => 'ContactCtl',
+          'default' => 'DefaultCtl'
+        );
 
-    if ($m = Req::val('m')) {
+        $this->model = 'default';
 
-      // we have a model, make sure it is permitted
-      if (isset($permitted_models[$m])) {
+        if ($m = Req::val('m')) {
 
-        // yes, the model is permitted
-        $this->model = $m;
+          // we have a model, make sure it is permitted
+          if (isset($permitted_models[$m])) {
 
-      }
+            // yes, the model is permitted
+            $this->model = $m;
 
-    }
+          }
 
-    $class = $permitted_models[$this->model];
+        }
 
-    $ctl = new $class();
+        $class = $permitted_models[$this->model];
 
-    header('Content-Type: application/json');
+        $ctl = new $class();
 
-    echo $ctl->json();
+        header('Content-Type: application/json');
+
+        echo $ctl->json();
+ 
+      } // .token matches
+ 
+      else {
+        die('API Access Requires an access token.');
+      } // ./token does not match
+
+    } // .token is set
+ 
+    else {
+     die('API Access Requires an access token.');
+    } // ./token is not set
 
   } // ./construct
 
