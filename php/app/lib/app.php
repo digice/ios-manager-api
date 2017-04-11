@@ -19,6 +19,7 @@ class AppCtl
     // check for global API token
     if ($t = Req::val('t')) {
 
+      // check that token matches ours
       if ($t == '1a79a4d60de6718e8e5b326e338ae533') {
 
         // add your API models to the list of permitted models
