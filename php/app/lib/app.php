@@ -30,17 +30,17 @@ class AppCtl
 
         $this->model = 'default';
 
+        // check for model
         if ($m = Req::val('m')) {
 
-          // we have a model, make sure it is permitted
+          // check that model is permitted
           if (isset($permitted_models[$m])) {
 
-            // yes, the model is permitted
             $this->model = $m;
 
-          }
+          } // ./model is permitted
 
-        }
+        } // ./model is set
 
         $class = $permitted_models[$this->model];
 
